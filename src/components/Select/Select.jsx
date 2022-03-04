@@ -4,8 +4,8 @@ import { themeStyles } from "./ThemeStyles";
 import "./Select.scss";
 
 const themes = {
-	normal: "",
-	transparent: "",
+  normal: "",
+  transparent: "",
 };
 
 /**
@@ -29,59 +29,68 @@ const themes = {
  */
 
 const Select = ({
-	options,
-	value,
-	setValue,
-	theme,
-	width,
-	height,
-	placeholder,
-	menuOnTop,
-	disabled,
-	isSearchable,
-	...rest
+  options,
+  value,
+  setValue,
+  theme,
+  width,
+  height,
+  placeholder,
+  menuOnTop,
+  disabled,
+  isSearchable,
+  ...rest
 }) => {
-	const [normalStyles, transparentStyles] = themeStyles(width, height, menuOnTop);
+  const [normalStyles, transparentStyles] = themeStyles(
+    width,
+    height,
+    menuOnTop
+  );
 
-	themes.normal = normalStyles;
-	themes.transparent = transparentStyles;
+  themes.normal = normalStyles;
+  themes.transparent = transparentStyles;
 
-	const setSelected = selected => {
-		if (rest.isMulti) setValue(selected?.map(opt => opt.value));
-		else setValue(selected.value);
-	};
+  const setSelected = (selected) => {
+    if (rest.isMulti) setValue(selected?.map((opt) => opt.value));
+    else setValue(selected.value);
+  };
 
-	let selectedOption;
+  let selectedOption;
 
-	options?.forEach(option => {
-		if (option.value == value) {
-			selectedOption = option;
-		}
-	});
+  options = Object.keys(options).map((key) => ({
+    label: options[key],
+    value: key,
+  }));
 
-	return (
-		<ReactSelect
-			options={options}
-			value={selectedOption}
-			onChange={setSelected}
-			styles={themes[theme]}
-			placeholder={placeholder}
-			isSearchable={isSearchable}
-			isDisabled={disabled}
-			classNamePrefix="cadence-select"
-			// menuIsOpen={true}
-			{...rest}
-		/>
-	);
+  options?.forEach((option) => {
+    if (option.value === value) {
+      selectedOption = option;
+    }
+  });
+
+  return (
+    <ReactSelect
+      options={options}
+      value={selectedOption}
+      onChange={setSelected}
+      styles={themes[theme]}
+      placeholder={placeholder}
+      isSearchable={isSearchable}
+      isDisabled={disabled}
+      classNamePrefix="cadence-select"
+      // menuIsOpen={true}
+      {...rest}
+    />
+  );
 };
 
 Select.defaultProps = {
-	theme: "normal",
-	width: "100%",
-	height: "50px",
-	menuOnTop: false,
-	disabled: false,
-	isSearchable: false,
+  theme: "normal",
+  width: "100%",
+  height: "50px",
+  menuOnTop: false,
+  disabled: false,
+  isSearchable: false,
 };
 
 export default Select;
