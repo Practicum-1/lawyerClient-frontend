@@ -1,0 +1,35 @@
+@import "../../../styles/variables";
+
+.collapseContainer {
+	width: fit-content;
+	position: relative;
+	height: auto;
+	max-height: 50px;
+	border-radius: 10px;
+	transition: max-height 0.2s ease;
+	overflow: hidden;
+
+	&.open {
+		max-height: 100vh;
+	}
+
+	// THEMES
+	&.primary {
+		background: $whiteShade2;
+	}
+
+	> .arrow {
+		position: absolute;
+		top: 20px;
+		right: 25px;
+		background: none;
+		border: none;
+		color: $black;
+		transition: 0.2s ease;
+		transform: rotate(180deg);
+
+		&.arrowDown {
+			transform: rotate(0deg);
+		}
+	}
+}

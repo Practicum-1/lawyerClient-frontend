@@ -1,12 +1,22 @@
 import "./App.scss";
-import HomePage from "./components/HomePage/HomePage";
-import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+//components
+import RBAC from "./rbac/RBAC";
+import HomePage from "./pages/Common/HomePage/HomePage";
+import Login from "./pages/Common/Login/Login";
+
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <HomePage />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* Open Routes */}
+        <Route path="/" exact element={<HomePage />} />
+        <Route path="/login" exact element={<Login />} />
+        {/* Routes rendered according to role*/}
+        <Route path="/*" element={<RBAC />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
