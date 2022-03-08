@@ -1,6 +1,5 @@
 import React from "react";
-import styles from "./Title.scss";
-
+import "./Title.scss";
 const Title = ({ children, size = "2rem", className, ...rest }) => {
   return (
     <div

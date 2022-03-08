@@ -5,16 +5,21 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RBAC from "./rbac/RBAC";
 import HomePage from "./pages/Common/HomePage/HomePage";
 import Login from "./pages/Common/Login/Login";
+import Signup from "./pages/Common/SignUp/Signup";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Open Routes */}
-        <Route path="/" exact element={<HomePage />} />
-        <Route path="/login" exact element={<Login />} />
-        {/* Routes rendered according to role*/}
-        <Route path="/*" element={<RBAC />} />
+        <Route path="/" element={<Navbar />}>
+          {/* <Route path="/" exact element={<HomePage />} /> */}
+          <Route path="/login" exact element={<Login />} />
+          {/* Routes rendered according to role*/}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/*" element={<RBAC />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

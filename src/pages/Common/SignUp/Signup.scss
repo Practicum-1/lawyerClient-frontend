@@ -1,0 +1,44 @@
+.signup-box {
+  display: grid;
+  width: 65vw;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+.input-box {
+  margin: 10px 0;
+  width: 70%;
+}
+.select-box {
+  margin: 10px 0;
+
+  width: 70%;
+}
+.image {
+  overflow: hidden;
+  @media screen and (max-width: 1200px) {
+    display: none;
+  }
+}
+.signup-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  p {
+    text-align: right;
+    width: 400px;
+  }
+}
+
+.reg-container {
+  display: flex;
+  flex-direction: column;
+}
+.role-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  Button {
+    margin: 10px;
+  }
+}
