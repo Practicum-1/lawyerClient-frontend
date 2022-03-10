@@ -9,33 +9,31 @@
     overflow: hidden;
     flex: 1;
     img {
+      height: 100%;
       width: 100%;
     }
-    @media screen and (max-width: 1200px) {
-      display: none;
-    }
+    // @media screen and (max-width: 1200px) {
+    //   display: none;
+    // }
   }
   .login-container {
-    width: 25%;
+    width: 500px;
     position: absolute;
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-    @media screen and (max-width: 1200px) {
-      width: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    @media screen and (max-width: 900px) {
-      width: 50%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    @media screen and (max-width: 700px) {
+      width: 100%;
     }
     .login-box {
-      box-shadow: 2px 6px 25px rgba(77, 108, 250, 0.15);
+      height: 100%;
+      width: 100%;
+      box-shadow: 2px 6px 25px rgba(77, 109, 250, 0.333);
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-
       backdrop-filter: blur(25px);
 
       .title {
@@ -50,12 +48,16 @@
       .email,
       .password,
       .role {
-        color: wheat;
-        margin: 10px;
+        color: white;
+        margin-bottom: 2rem;
       }
       .input-box {
-        margin: 10px 0;
         width: 65%;
+        margin-bottom: 1rem;
+        input,
+        > div {
+          margin-top: 0.6rem;
+        }
       }
       .error {
         color: red;

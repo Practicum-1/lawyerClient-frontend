@@ -13,13 +13,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Open Routes */}
-        <Route path="/" element={<Navbar />}>
-          {/* <Route path="/" exact element={<HomePage />} /> */}
-          <Route path="/login" exact element={<Login />} />
-          {/* Routes rendered according to role*/}
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/*" element={<RBAC />} />
-        </Route>
+        <Route path="/" exact element={<HomePage />} />
+        <Route path="/login" exact element={<Login />} />
+        {/* Routes rendered according to role*/}
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/*" element={<RBAC />} />
       </Routes>
     </BrowserRouter>
   );

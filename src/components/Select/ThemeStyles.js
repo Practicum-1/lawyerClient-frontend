@@ -12,7 +12,7 @@ export const themeStyles = (width, height, menuOnTop) => {
       fontWeight: "500",
       boxShadow: "none",
       minHeight: "initial",
-      borderRadius: "20px",
+      // borderRadius: "20px",
     }),
     dropdownIndicator: (current, { selectProps: { menuIsOpen } }) => ({
       ...current,
@@ -47,7 +47,7 @@ export const themeStyles = (width, height, menuOnTop) => {
       ...(isFocused && {
         background: isSelected
           ? "linear-gradient(106.52deg, #A282E8 -11.57%, #7E8EE7 50.39%, #4499E9 116.35%)"
-          : "grey",
+          : "linear-gradient(315deg, #deebdd 0%, #bbdbbe 74%);",
         color: isSelected ? "white" : "black",
       }),
       cursor: "pointer",

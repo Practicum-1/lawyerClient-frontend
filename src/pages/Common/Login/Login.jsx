@@ -9,13 +9,12 @@ import Title from "../../../components/Title/Title";
 import { ROLES } from "../../../constants/roles";
 import "./Login.scss";
 
-
 const Login = () => {
-  const [input, setInput] = useState({ email: "", password: "" , role:"" });
+  const [input, setInput] = useState({ email: "", password: "", role: "" });
   const options = {
     [ROLES.CLIENT]: "CLIENT",
     [ROLES.LAWYER]: "LAWYER",
-}
+  };
   const onSubmit = (passedVal) => {
     console.log(passedVal);
   };
@@ -33,10 +32,21 @@ const Login = () => {
       </div>
       <div className="login-container">
         <Card className="login-box">
-          <Title className="title">SIGN  IN</Title>
-          <div className="select-box">
+          <Title className="title">SIGN IN</Title>
+          <div className="input-box">
             <Label className="role">Who are you ?</Label>
-            <Input type="select" name="role" value={input} setValue={setInput} options={options} isSearchable="true" />
+            <Input
+              type="select"
+              name="role"
+              value={input}
+              setValue={setInput}
+              options={options}
+              isSearchable="true"
+              width="100%"
+              height="45px"
+              className="role-select"
+              // styles={{ marginTop: "20px" }}
+            />
           </div>
           <div className="input-box">
             <Label className="email">Email</Label>

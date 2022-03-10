@@ -52,7 +52,7 @@ const Select = ({
 
   const setSelected = (selected) => {
     // if (rest.isMulti) setValue(selected?.map((opt) => opt.value));
-     setValue(selected.value);
+    setValue(selected.value);
   };
 
   let selectedOption;
