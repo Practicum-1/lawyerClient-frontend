@@ -9,6 +9,7 @@
     overflow: hidden;
     flex: 1;
     img {
+      height: 100%;
       width: 100%;
     }
     @media screen and (max-width: 1200px) {
@@ -16,27 +17,19 @@
     }
   }
   .login-container {
-    width: 25%;
-    position: absolute;
-    top: 50%;
-    right: 5%;
-    transform: translateY(-50%);
-    @media screen and (max-width: 1200px) {
-      width: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    @media screen and (max-width: 900px) {
-      width: 50%;
-    }
+    display: flex;
+    align-items: center;
+    width: 33%;
+    justify-content: center;
     .login-box {
-      box-shadow: 2px 6px 25px rgba(77, 108, 250, 0.15);
+      width: 76%;
+      box-shadow: 2px 6px 25px rgba(77, 109, 250, 0.333);
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       .title {
-        color: pink;
+        color: $black;
         margin: 30px 0;
       }
       .input-box {

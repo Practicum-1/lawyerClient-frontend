@@ -12,19 +12,6 @@ export default function HomePage() {
             <br />
             <p>Find More clients and grow your practice </p>
           </div>
-          <div className="form">
-            <input
-              type="text"
-              placeholder="Enter Full Name"
-              className="name-input"
-            />
-            <input
-              type="text"
-              placeholder="Enter email address"
-              className="email-input"
-            />
-            <button>LogIn / SignUp</button>
-          </div>
         </div>
       </div>
     </>
