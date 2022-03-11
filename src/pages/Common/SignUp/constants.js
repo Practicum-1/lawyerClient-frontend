@@ -1,5 +1,5 @@
 import { courtNames } from "../../../constants/courtNames";
-import { practiceAreas } from "../../../constants/practiceAreas";
+import { PRACTICE_AREAS } from "../../../constants/practiceAreas";
 import { languages } from "../../../constants/languages";
 import { cities } from "../../../constants/cities";
 
@@ -89,7 +89,7 @@ export const LAWYER_INPUT_FIELDS = [
     label: "Practice Areas ",
     placeholder: "Enter Practice Areas",
     type: "select",
-    options: practiceAreas,
+    options: PRACTICE_AREAS,
   },
 ];
 

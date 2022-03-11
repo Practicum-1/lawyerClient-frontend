@@ -27,7 +27,7 @@ export default function SignUp() {
     location: "",
     email: "",
     phone: "",
-    password: " ",
+    password: "",
     education: "",
     gender: " ",
     experience: 0,
