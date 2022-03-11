@@ -12,10 +12,15 @@ import ButtonThemes from "../../../components/Button/Themes";
 import { ROLES } from "../../../constants/roles";
 
 import "./Signup.scss";
+import { PRACTICE_AREAS } from "../../../constants/practiceAreas";
 
 export default function SignUp() {
   const [role, setRole] = useState(ROLES.CLIENT);
   const [inputFields, setInputFields] = useState(CLIENT_INPUT_FIELDS);
+  const [practiceAreas, setPracticeAreas] = useState([]);
+  const [practiceAreaOptions, setPracticeAreaOptions] =
+    useState(PRACTICE_AREAS);
+  const [currentPracticeArea, setCurrentPracticeArea] = useState("");
   const [input, setInput] = useState({
     first_name: "",
     last_name: "",
@@ -27,7 +32,7 @@ export default function SignUp() {
     gender: " ",
     experience: 0,
     court_name: "",
-    practice_areas: {},
+    practice_areas: "",
     languages: {},
   });
 
@@ -38,6 +43,23 @@ export default function SignUp() {
       setInputFields(LAWYER_INPUT_FIELDS);
     }
   }, [role]);
+
+  useEffect(() => {
+    setCurrentPracticeArea(input.practice_areas);
+  }, [input]);
+
+  useEffect(() => {
+    setPracticeAreas((prev) => [...prev, input.practice_areas]);
+    setInput({ ...input, practice_areas: "" });
+  }, [currentPracticeArea]);
+
+  useEffect(() => {
+    const newPracticeAreaOptions = {};
+    Object.keys(PRACTICE_AREAS)
+      .filter((option) => !practiceAreas.includes(option))
+      .forEach((key) => (newPracticeAreaOptions[key] = PRACTICE_AREAS[key]));
+    setPracticeAreaOptions(newPracticeAreaOptions);
+  }, [practiceAreas]);
 
   const onSubmit = (passedVal) => {
     console.log(passedVal);
@@ -98,7 +120,11 @@ export default function SignUp() {
                   <Input
                     type="select"
                     placeholder={field.placeholder}
-                    options={field.options}
+                    options={
+                      !field.name === "practice_areas"
+                        ? field.options
+                        : practiceAreaOptions
+                    }
                     setValue={setInput}
                     value={input}
                     name={field.name}

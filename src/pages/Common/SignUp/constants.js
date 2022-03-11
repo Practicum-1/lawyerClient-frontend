@@ -41,7 +41,7 @@ export const LAWYER_INPUT_FIELDS = [
   {
     name: "phone",
     label: " Phone",
-    placeholder: "00000000",
+    placeholder: "+91 xxxxxxxxxx",
     type: "text",
   },
   {
@@ -122,7 +122,7 @@ export const CLIENT_INPUT_FIELDS = [
   {
     name: "phone",
     label: " Phone",
-    placeholder: "00000000",
+    placeholder: "+91 xxxxxxxxxx",
     type: "text",
   },
   {

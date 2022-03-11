@@ -1,4 +1,4 @@
-export const practiceAreas = {
+export const PRACTICE_AREAS = {
   1: "Personal",
   10: "Labour & Service",
   11: "Corporate Law",
