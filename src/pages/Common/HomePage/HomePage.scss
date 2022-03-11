@@ -29,6 +29,7 @@
     }
     .tagline {
       display: flex;
+      justify-content: space-around;
       gap: 2rem;
       z-index: 2;
       flex: 1;
@@ -36,7 +37,6 @@
         font-size: 3rem;
         margin-bottom: 2rem;
         width: 40vw;
-
         text-shadow: rgba(34, 34, 34, 0.503) 0px 0px 7px;
       }
     }

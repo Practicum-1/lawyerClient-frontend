@@ -31,34 +31,37 @@ export default function Navbar() {
         </nav>
         <Outlet />
       </div> */}
-      <header>
-        <h2>NAAM</h2>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">FIND A LAWYER</Link>
-            </li>
-            <li>
-              <Link to="/">LEGAL SERVICES</Link>
-            </li>
-            <li>
+      <nav>
+        <Link to="/">
+          <img src="./images/logo.png" className="navbar-logo" alt="" />
+        </Link>
+        <ul>
+          <li>
+            <Link to="/" className="nav-links">
+              FIND A LAWYER
+            </Link>
+          </li>
+          <li>
+            <Link to="/" className="nav-links">
+              LEGAL SERVICES
+            </Link>
+          </li>
+          <li className="user">
+            <Link to="/user">
               <img src="/images/avatar.png" alt="avatar" />
-            </li>
-            <li>
-              <Link to="/signup">
-                <Button className="nav-button">SignUp</Button>
-              </Link>
-              <Link to="/login">
-                <Button className="nav-button">Login</Button>
-              </Link> 
-            </li>
-            </ul>
-        </nav>
-
-
-      </header>
-      
-<Outlet/>
+            </Link>
+          </li>
+          <li className="buttons">
+            <Link to="/signup">
+              <Button className="nav-button">SignUp</Button>
+            </Link>
+            <Link to="/login">
+              <Button className="nav-button">Login</Button>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      <Outlet />
     </>
   );
 }
