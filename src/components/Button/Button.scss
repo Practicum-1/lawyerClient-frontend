@@ -18,7 +18,8 @@
 }
 
 .themed-button.primary {
-  background: green;
+  background-color: #a55c1b;
+  background-image: linear-gradient(315deg, #9a5e29 20%, #361b1b 80%);
   color: white;
   border: none;
   transition: 0.15s ease all;
@@ -71,4 +72,10 @@
       background: transparent;
     }
   }
+}
+
+.themed-button.grey-outline-button {
+  background: rgba(223, 216, 216, 0.544);
+  outline: none;
+  border: none;
 }

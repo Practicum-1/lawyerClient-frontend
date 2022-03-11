@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../../components/Button/Button";
 import Card from "../../../components/Card/Card";
 import Input from "../../../components/Input/Input";
@@ -8,11 +8,14 @@ import Title from "../../../components/Title/Title";
 import Container from "../../../components/Container/Container";
 import { LAWYER_INPUT_FIELDS } from "../../Common/SignUp/constants";
 import { CLIENT_INPUT_FIELDS } from "../../Common/SignUp/constants";
+import ButtonThemes from "../../../components/Button/Themes";
+import { ROLES } from "../../../constants/roles";
 
 import "./Signup.scss";
 
 export default function SignUp() {
-  const [role, setRole] = useState(CLIENT_INPUT_FIELDS);
+  const [role, setRole] = useState(ROLES.CLIENT);
+  const [inputFields, setInputFields] = useState(CLIENT_INPUT_FIELDS);
   const [input, setInput] = useState({
     first_name: "",
     last_name: "",
@@ -24,30 +27,56 @@ export default function SignUp() {
     gender: " ",
     experience: 0,
     court_name: "",
-    practice_areas: {}  ,
-    languages: {}
+    practice_areas: {},
+    languages: {},
   });
+
+  useEffect(() => {
+    if (role === ROLES.CLIENT) {
+      setInputFields(CLIENT_INPUT_FIELDS);
+    } else {
+      setInputFields(LAWYER_INPUT_FIELDS);
+    }
+  }, [role]);
 
   const onSubmit = (passedVal) => {
     console.log(passedVal);
   };
 
   return (
-    <Container>
-      <div className="reg-container">
+    <PageContainer className={"signup-page-container"}>
+      <Container>
         <div className="signup-header">
-          <Title> Register Here</Title>
-          <p>
+          <Title>Register Here</Title>
+          <div>
             We need you to help us with some basic information for your account
             creation. All fields are mandatory
-          </p>
+          </div>
         </div>
         <div className="role-buttons">
-          <Button onClick={() => setRole(CLIENT_INPUT_FIELDS)}>CLIENT</Button>
-          <Button onClick={() => setRole(LAWYER_INPUT_FIELDS)}>LAWYER</Button>
+          <Button
+            onClick={() => setRole(ROLES.CLIENT)}
+            theme={
+              role === ROLES.CLIENT
+                ? ButtonThemes.PRIMARY
+                : ButtonThemes.GREY_OUTLINE
+            }
+          >
+            CLIENT
+          </Button>
+          <Button
+            onClick={() => setRole(ROLES.LAWYER)}
+            theme={
+              role === ROLES.LAWYER
+                ? ButtonThemes.PRIMARY
+                : ButtonThemes.GREY_OUTLINE
+            }
+          >
+            LAWYER
+          </Button>
         </div>
-        <Card className="signup-box">
-          {role.map((field) => {
+        <div className="signup-box">
+          {inputFields.map((field) => {
             if (field.type === "text" || field.type === "password") {
               return (
                 <div className="input-box">
@@ -74,30 +103,20 @@ export default function SignUp() {
                     value={input}
                     name={field.name}
                     isSearchable="true"
+                    height="45px"
                   />
                 </div>
               );
             }
           })}
-          <div className="buttons">
-            <br />
-            <Button onClick={() => onSubmit(input)} id="login-btn">
-              Register Now
-            </Button>
-          </div>
-        </Card>
-      </div>
-      <div className="image">
-        <img
-          src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
-          alt=""
-        />
-
-        {/* <img
-          src="https://images.pexels.com/photos/8867253/pexels-photo-8867253.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-          alt=""
-        /> */}
-      </div>
-    </Container>
+        </div>
+        <div className="buttons">
+          <br />
+          <Button onClick={() => onSubmit(input)} id="login-btn">
+            Register Now
+          </Button>
+        </div>
+      </Container>
+    </PageContainer>
   );
 }

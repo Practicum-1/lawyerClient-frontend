@@ -6,7 +6,7 @@ export const themeStyles = (width, height, menuOnTop) => {
       ...current,
       width,
       height,
-      borderColor: "#A282E8",
+      borderColor: "rgba(0, 0, 0, 0.272)",
       backgroundColor: "white",
       cursor: "pointer",
       fontWeight: "500",

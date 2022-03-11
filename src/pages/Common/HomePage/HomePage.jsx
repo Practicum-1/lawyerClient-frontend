@@ -1,19 +1,28 @@
 import "./HomePage.scss";
 import React from "react";
 
+import PageContainer from "../../../components/PageContainer/PageContainer";
+import Container from "../../../components/Container/Container";
+import Title from "../../../components/Title/Title";
+
 export default function HomePage() {
   return (
-    <>
-      <div className="main-container">
-        <img src="/images/meeting.jpg" alt="" />
-        <div className="container">
-          <div className="text-content">
-            <h1>Find the perfect expert Lawyer that suits your needs </h1>
-            <br />
-            <p>Find More clients and grow your practice </p>
+    <PageContainer className={"homepage-container"}>
+      <Container>
+        <div className="first-section">
+          <img
+            src="https://www.theladders.com/wp-content/uploads/handshake_190617.jpg"
+            alt=""
+          />
+          <div className="page-title">
+            <Title size="5rem"> VAKALAT </Title>
+          </div>
+          <div className="tagline">
+            <h1>Find the perfect Lawyer that suits your needs </h1>
+            <h1>Find More clients and grow your practice </h1>
           </div>
         </div>
-      </div>
-    </>
+      </Container>
+    </PageContainer>
   );
 }

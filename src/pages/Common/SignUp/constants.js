@@ -51,17 +51,18 @@ export const LAWYER_INPUT_FIELDS = [
     type: "password",
   },
   {
-    name: "education",
-    label: "Education",
-    placeholder: "Enter Education",
-    type: "text",
-  },
-  {
     name: "gender",
     label: "Gender",
     placeholder: "Male / Female / Other",
     type: "text",
   },
+  {
+    name: "education",
+    label: "Education",
+    placeholder: "Enter Education",
+    type: "text",
+  },
+
   {
     name: "experience",
     label: "Experience",
