@@ -1,4 +1,4 @@
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../constants/COLORS";
 
 export const themeStyles = (width, height, menuOnTop) => {
   const normalStyles = {

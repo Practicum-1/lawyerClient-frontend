@@ -6,7 +6,7 @@ import Label from "../../../components/Label/Label";
 import PageContainer from "../../../components/PageContainer/PageContainer";
 import Select from "../../../components/Select/Select";
 import Title from "../../../components/Title/Title";
-import { ROLES } from "../../../constants/roles";
+import { ROLES } from "../../../constants/ROLES";
 import "./Login.scss";
 
 const Login = () => {

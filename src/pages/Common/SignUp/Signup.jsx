@@ -9,10 +9,10 @@ import Container from "../../../components/Container/Container";
 import { LAWYER_INPUT_FIELDS } from "../../Common/SignUp/constants";
 import { CLIENT_INPUT_FIELDS } from "../../Common/SignUp/constants";
 import ButtonThemes from "../../../components/Button/Themes";
-import { ROLES } from "../../../constants/roles";
+import { ROLES } from "../../../constants/ROLES";
 
 import "./Signup.scss";
-import { PRACTICE_AREAS } from "../../../constants/practiceAreas";
+import { PRACTICE_AREAS } from "../../../constants/PRACTICE_AREAS";
 
 export default function SignUp() {
   const [role, setRole] = useState(ROLES.CLIENT);

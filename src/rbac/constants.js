@@ -1,4 +1,4 @@
-import { ROLES } from "../constants/roles";
+import { ROLES } from "../constants/ROLES";
 import { CLIENT_ROUTES } from "./role-routes/client";
 import { LAWYER_ROUTES } from "./role-routes/lawyer";
 
