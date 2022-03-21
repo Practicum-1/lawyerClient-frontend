@@ -7,7 +7,7 @@ import HomePage from "./pages/Common/HomePage/HomePage";
 import Login from "./pages/Common/Login/Login";
 import Signup from "./pages/Common/SignUp/Signup";
 import Navbar from "./components/Navbar/Navbar";
-
+import LawyerCard from "./pages/Client/LawyerCard/LawyerCard";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +18,7 @@ function App() {
         <Route path="/login" exact element={<Login />} />
         {/* Routes rendered according to role*/}
         <Route path="/signup" element={<Signup />} />
+        <Route path="findLawyer" element={<LawyerCard />} />
         {/* </Route> */}
         <Route path="/*" element={<RBAC />} />
       </Routes>
