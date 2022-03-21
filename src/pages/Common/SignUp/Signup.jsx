@@ -47,9 +47,10 @@ export default function SignUp() {
   useEffect(() => {
     setCurrentPracticeArea(input.practice_areas);
   }, [input]);
-
+  // input will change , it will trigger setCurrentPracticeArea which will trigger the below useEffect
   useEffect(() => {
     setPracticeAreas((prev) => [...prev, input.practice_areas]);
+    //
     setInput({ ...input, practice_areas: "" });
   }, [currentPracticeArea]);
 
@@ -97,44 +98,68 @@ export default function SignUp() {
             LAWYER
           </Button>
         </div>
-        <div className="signup-box">
-          {inputFields.map((field) => {
-            if (field.type === "text" || field.type === "password") {
-              return (
-                <div className="input-box">
-                  <Label>{field.label}</Label>
-                  <Input
-                    type={field.type}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    value={input}
-                    setValue={setInput}
-                  />
-                </div>
-              );
-            }
-            if (field.type === "select") {
-              return (
-                <div className="input-box">
-                  <Label className="role">{field.label}</Label>
-                  <Input
-                    type="select"
-                    placeholder={field.placeholder}
-                    options={
-                      !field.name === "practice_areas"
-                        ? field.options
-                        : practiceAreaOptions
-                    }
-                    setValue={setInput}
-                    value={input}
-                    name={field.name}
-                    isSearchable="true"
-                    height="45px"
-                  />
-                </div>
-              );
-            }
-          })}
+        <div className="main-signup-box">
+          <div className="signup-box">
+            {inputFields.map((field) => {
+              if (field.type === "text" || field.type === "password") {
+                return (
+                  <div className="input-box">
+                    <Label>{field.label}</Label>
+                    <Input
+                      type={field.type}
+                      name={field.name}
+                      placeholder={field.placeholder}
+                      value={input}
+                      setValue={setInput}
+                    />
+                  </div>
+                );
+              }
+              if (field.type === "select") {
+                return (
+                  <div className="input-box">
+                    <Label className="role">{field.label}</Label>
+                    <Input
+                      type="select"
+                      placeholder={field.placeholder}
+                      options={
+                        field.name === "practice_areas"
+                          ? practiceAreaOptions
+                          : field.options
+                      }
+                      setValue={setInput}
+                      value={input}
+                      name={field.name}
+                      isSearchable="true"
+                      height="45px"
+                    />
+                    {field.name === "practice_areas" &&
+                      practiceAreas.map((practiceArea) => (
+                        <div className="selected-practice-area">
+                          <span>{PRACTICE_AREAS[practiceArea]}</span>
+                          {console.log(practiceArea)}
+                        </div>
+                      ))}
+                  </div>
+                );
+              }
+            })}
+          </div>
+          {role === ROLES.LAWYER ? (
+            <div className="image">
+              <img
+                src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
+                alt="lawyer"
+              />
+            </div>
+          ) : (
+            <div className="image">
+              <img
+                src="https://images.pexels.com/photos/5668842/pexels-photo-5668842.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                alt="client"
+              />
+            </div>
+          )}
         </div>
         <div className="buttons">
           <br />
