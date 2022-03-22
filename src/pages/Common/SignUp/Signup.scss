@@ -18,9 +18,9 @@
       align-items: center;
       .image {
         width: 30%;
+        overflow: hidden;
         height: 60%;
         align-self: flex-start;
-        
       }
     }
     .signup-box {

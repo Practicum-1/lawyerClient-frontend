@@ -133,19 +133,19 @@ export default function SignUp() {
                       isSearchable="true"
                       height="45px"
                     />
-                    {field.name === "practice_areas" &&
+                    {/* {field.name === "practice_areas" &&
                       practiceAreas.map((practiceArea) => (
                         <div className="selected-practice-area">
                           <span>{PRACTICE_AREAS[practiceArea]}</span>
                           {console.log(practiceArea)}
                         </div>
-                      ))}
+                      ))} */}
                   </div>
                 );
               }
             })}
           </div>
-          {role === ROLES.LAWYER ? (
+          {/* {role === ROLES.LAWYER ? (
             <div className="image">
               <img
                 src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80"
@@ -159,7 +159,7 @@ export default function SignUp() {
                 alt="client"
               />
             </div>
-          )}
+          )} */}
         </div>
         <div className="buttons">
           <br />
