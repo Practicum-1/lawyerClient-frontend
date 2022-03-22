@@ -1,7 +1,7 @@
 import { courtNames } from "../../../constants/COURT_NAMES";
 import { PRACTICE_AREAS } from "../../../constants/PRACTICE_AREAS";
-import { languages } from "../../../constants/LANGUAGES";
-import { cities } from "../../../constants/CITIES";
+import { languages } from "../../../constants/languages";
+import { cities } from "../../../constants/cities";
 
 const options = {
   0: "<1yr",

@@ -9,7 +9,7 @@ import Container from "../../../components/Container/Container";
 import { LAWYER_INPUT_FIELDS } from "../../Common/SignUp/constants";
 import { CLIENT_INPUT_FIELDS } from "../../Common/SignUp/constants";
 import ButtonThemes from "../../../components/Button/Themes";
-import { ROLES } from "../../../constants/ROLES";
+import { ROLES } from "../../../constants/roles";
 
 import "./Signup.scss";
 import { PRACTICE_AREAS } from "../../../constants/PRACTICE_AREAS";
