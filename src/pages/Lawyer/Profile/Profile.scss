@@ -1,0 +1,29 @@
+$tableHeading: #eaeaea;
+
+.review-form {
+  .review-textarea {
+    width: 60% !important;
+    height: 150px;
+  }
+}
+
+.review {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px 0;
+  }
+
+  &-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px;
+    border-radius: 10px 10px 0 0;
+    background: $tableHeading;
+    width: 60%;
+  }
+
+  &-timestamp {
+    margin-top: 5px;
+  }
+}

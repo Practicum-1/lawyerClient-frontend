@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Button from "../../../components/Button/Button";
 import Card from "../../../components/Card/Card";
@@ -6,17 +7,36 @@ import Label from "../../../components/Label/Label";
 import PageContainer from "../../../components/PageContainer/PageContainer";
 import Select from "../../../components/Select/Select";
 import Title from "../../../components/Title/Title";
+import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../../constants/roles";
 import "./Login.scss";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState({ email: "", password: "", role: "" });
   const options = {
     [ROLES.CLIENT]: "CLIENT",
     [ROLES.LAWYER]: "LAWYER",
   };
-  const onSubmit = (passedVal) => {
-    console.log(passedVal);
+  const onSubmit = async () => {
+    try {
+      const res = await axios.post("/auth/login", input);
+
+      if (res.data.data.token) {
+        const payload = {
+          role: input.role,
+          accessToken: res.data.data.token,
+        };
+        localStorage.setItem("user", JSON.stringify(payload));
+
+        if (input.role === ROLES.CLIENT) {
+          navigate("/find-lawyers");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    // console.log(passedVal);
   };
 
   return (
@@ -69,7 +89,7 @@ const Login = () => {
           </div>
           {/* <span className="error">{error}</span> */}
           <div className="buttons">
-            <Button onClick={() => onSubmit(input)} id="login-btn">
+            <Button onClick={onSubmit} id="login-btn">
               Sign in
             </Button>
           </div>

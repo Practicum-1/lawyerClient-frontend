@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
+import { ROLE_ROUTES } from "./../../rbac/constants";
 
-import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  Outlet,
+  useNavigate,
+} from "react-router-dom";
 import Button from "../Button/Button";
+
 export default function Navbar() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const checkAuthentication = () => {
+    if (user?.accessToken && Object.keys(ROLE_ROUTES).includes(user?.role)) {
+      return true;
+    }
+    return false;
+  };
+
+  const [isLoggedIn, setIsLoggedIn] = useState();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const resp = checkAuthentication();
+
+    setIsLoggedIn(resp);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
     <>
       {/* <div className="navbar">
@@ -37,7 +67,7 @@ export default function Navbar() {
         </Link>
         <ul>
           <li>
-            <Link to="/" className="nav-links">
+            <Link to="/find-lawyers" className="nav-links">
               FIND A LAWYER
             </Link>
           </li>
@@ -51,14 +81,26 @@ export default function Navbar() {
               <img src="/images/avatar.png" alt="avatar" />
             </Link>
           </li>
-          <li className="buttons">
-            <Link to="/signup">
-              <Button className="nav-button">SignUp</Button>
-            </Link>
-            <Link to="/login">
-              <Button className="nav-button">Login</Button>
-            </Link>
-          </li>
+          {isLoggedIn ? (
+            <>
+              <li className="buttons">
+                <Button onClick={handleLogout} className="nav-button">
+                  LogOut
+                </Button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="buttons">
+                <Link to="/signup">
+                  <Button className="nav-button">SignUp</Button>
+                </Link>
+                <Link to="/login">
+                  <Button className="nav-button">Login</Button>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
       <Outlet />

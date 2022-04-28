@@ -1,5 +1,6 @@
 import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import axios from "axios";
 
 //components
 import RBAC from "./rbac/RBAC";
@@ -7,8 +8,22 @@ import HomePage from "./pages/Common/HomePage/HomePage";
 import Login from "./pages/Common/Login/Login";
 import Signup from "./pages/Common/SignUp/Signup";
 import Navbar from "./components/Navbar/Navbar";
+import FindLawyer from "./pages/Client/FindLawyer/FindLawyer";
+import { useEffect } from "react";
 
 function App() {
+  axios.defaults.baseURL = "http://localhost:8080";
+
+  axios.defaults.headers.common["Authorization"] = `Bearer ${
+    JSON.parse(localStorage.getItem("user")).accessToken
+  }`;
+  // const payload = {
+  //   role: "client",
+  //   accessToken: "tken",
+  // };
+  // useEffect(() => {
+  //   localStorage.setItem("user", JSON.stringify(payload));
+  // }, []);
   return (
     <BrowserRouter>
       <Routes>

@@ -12,6 +12,11 @@ const options = {
   5: ">5yr",
 };
 
+const genderOptions = {
+  male: "Male",
+  femlae: "Female",
+};
+
 export const LAWYER_INPUT_FIELDS = [
   {
     name: "first_name",
@@ -26,7 +31,7 @@ export const LAWYER_INPUT_FIELDS = [
     type: "text",
   },
   {
-    name: "location",
+    name: "location_id",
     label: "Location",
     placeholder: "Select Location",
     type: "select",
@@ -35,31 +40,32 @@ export const LAWYER_INPUT_FIELDS = [
   {
     name: "email",
     label: "Email",
-    placeholder: "Enter email address",
+    placeholder: "Enter Email",
     type: "text",
   },
   {
     name: "phone",
     label: " Phone",
-    placeholder: "00000000",
+    placeholder: "Enter Phone No.",
     type: "text",
   },
   {
     name: "password",
     label: "Password",
-    placeholder: "*******",
+    placeholder: "Enter Password",
     type: "password",
   },
   {
     name: "gender",
     label: "Gender",
-    placeholder: "Male / Female / Other",
-    type: "text",
+    placeholder: "Select Gender",
+    type: "select",
+    options: genderOptions,
   },
   {
     name: "education",
     label: "Education",
-    placeholder: "Enter Education",
+    placeholder: "Your Education",
     type: "text",
   },
 
@@ -71,7 +77,7 @@ export const LAWYER_INPUT_FIELDS = [
     options: options,
   },
   {
-    name: "court_name",
+    name: "courts",
     label: "Court Name",
     placeholder: "Enter Court name",
     type: "select",
@@ -107,7 +113,7 @@ export const CLIENT_INPUT_FIELDS = [
     type: "text",
   },
   {
-    name: "location",
+    name: "location_id",
     label: "Location",
     placeholder: "Select Location",
     type: "select",
@@ -116,25 +122,26 @@ export const CLIENT_INPUT_FIELDS = [
   {
     name: "email",
     label: "Email",
-    placeholder: "Enter email address",
+    placeholder: "Enter Email",
     type: "text",
   },
   {
     name: "phone",
-    label: " Phone",
-    placeholder: "00000000",
+    label: " Phone No.",
+    placeholder: "Enter Phone No.",
     type: "text",
   },
   {
     name: "password",
     label: "Password",
-    placeholder: "*******",
+    placeholder: "Enter Password",
     type: "password",
   },
   {
     name: "gender",
     label: "Gender",
-    placeholder: "Male / Female / Other",
-    type: "text",
+    placeholder: "Select Gender",
+    type: "select",
+    options: genderOptions,
   },
 ];

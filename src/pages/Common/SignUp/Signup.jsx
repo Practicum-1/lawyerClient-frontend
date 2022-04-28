@@ -12,6 +12,7 @@ import ButtonThemes from "../../../components/Button/Themes";
 import { ROLES } from "../../../constants/roles";
 
 import "./Signup.scss";
+import axios from "axios";
 
 export default function SignUp() {
   const [role, setRole] = useState(ROLES.CLIENT);
@@ -19,16 +20,16 @@ export default function SignUp() {
   const [input, setInput] = useState({
     first_name: "",
     last_name: "",
-    location: "",
+    location_id: 0,
     email: "",
     phone: "",
-    password: " ",
+    password: "",
     education: "",
-    gender: " ",
+    gender: "",
     experience: 0,
-    court_name: "",
-    practice_areas: {},
-    languages: {},
+    courts: "",
+    practice_areas: [],
+    languages: [],
   });
 
   useEffect(() => {
@@ -39,8 +40,38 @@ export default function SignUp() {
     }
   }, [role]);
 
-  const onSubmit = (passedVal) => {
-    console.log(passedVal);
+  const handelSignUp = async () => {
+    if (role === ROLES.CLIENT) {
+      const clientPayload = {
+        ...input,
+        location_id: Number(input.location_id),
+      };
+
+      // const deleteKeys = [
+      //   "courts",
+      //   "education",
+      //   "experience",
+      //   "languages",
+      //   "location_id",
+      //   "practice_areas",
+      // ];
+
+      // deleteKeys.forEach((e) => delete clientPayload[e]);
+
+      await axios.post("/client", clientPayload);
+    } else {
+      const lawyerPayload = {
+        ...input,
+        experience: Number(input.experience),
+        location_id: Number(input.location_id),
+        languages: [{ language_id: Number(input.languages) }],
+        courts: [{ court_id: Number(input.courts) }],
+        practice_areas: [{ practice_area_id: Number(input.practice_areas) }],
+      };
+      console.log("ujjwal", lawyerPayload);
+
+      await axios.post("/lawyer", lawyerPayload);
+    }
   };
 
   return (
@@ -76,10 +107,14 @@ export default function SignUp() {
           </Button>
         </div>
         <div className="signup-box">
-          {inputFields.map((field) => {
-            if (field.type === "text" || field.type === "password") {
+          {inputFields.map((field, index) => {
+            if (
+              field.type === "text" ||
+              field.type === "password" ||
+              field.type === "number"
+            ) {
               return (
-                <div className="input-box">
+                <div className="input-box" key={index}>
                   <Label>{field.label}</Label>
                   <Input
                     type={field.type}
@@ -93,7 +128,7 @@ export default function SignUp() {
             }
             if (field.type === "select") {
               return (
-                <div className="input-box">
+                <div className="input-box" key={index}>
                   <Label className="role">{field.label}</Label>
                   <Input
                     type="select"
@@ -112,7 +147,7 @@ export default function SignUp() {
         </div>
         <div className="buttons">
           <br />
-          <Button onClick={() => onSubmit(input)} id="login-btn">
+          <Button onClick={handelSignUp} id="login-btn">
             Register Now
           </Button>
         </div>

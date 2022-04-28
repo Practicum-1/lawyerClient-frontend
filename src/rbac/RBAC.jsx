@@ -19,7 +19,10 @@ const RBAC = () => {
   return checkAuthentication() ? (
     <PageContainer className={"route-page-container"}>
       <div className={"navbar"}>
-        <Navbar routes={ROLE_ROUTES[user.role]} />
+        <Navbar
+          routes={ROLE_ROUTES[user.role]}
+          checkAuthentication={checkAuthentication}
+        />
       </div>
       <div className={`route-container`}>
         <Routes>
