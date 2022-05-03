@@ -12,11 +12,12 @@ import FindLawyer from "./pages/Client/FindLawyer/FindLawyer";
 import { useEffect } from "react";
 
 function App() {
-  axios.defaults.baseURL = "http://localhost:8080";
+  // axios.defaults.baseURL = "http://localhost:8080";
 
-  axios.defaults.headers.common["Authorization"] = `Bearer ${
-    JSON.parse(localStorage.getItem("user")).accessToken
-  }`;
+  // axios.defaults.headers.common["Authorization"] = `Bearer ${
+  //   JSON.parse(localStorage.getItem("user"))?.accessToken
+  // }`;
+
   // const payload = {
   //   role: "client",
   //   accessToken: "tken",

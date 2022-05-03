@@ -1,58 +1,72 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "./Profile.scss";
 import ViewDetails from "./../../../assets/icons/details.svg";
 import Input from "../../../components/Input/Input";
 import Label from "../../../components/Label/Label";
 import Button from "../../../components/Button/Button";
+import service from "./../../../util/axiosConfig";
+import lawyerIcon from "./../../../assets/icons/lawyerIcon.png";
+import moment from "moment";
+import StarRating from "../../../components/StarRating/StarRating";
 
 const Profile = () => {
   const [lawyer, setLawyer] = useState();
   const { id } = useParams();
-
-  const [input, setInput] = useState({ review: "" });
+  const [reviews, setReviews] = useState([]);
+  const [input, setInput] = useState({ reviewDescription: "", rating: 3 });
   const navigate = useNavigate();
 
   useEffect(async () => {
-    const res = await axios.get(`/lawyer/${id}`);
+    const res = await service.get(`/lawyer/${id}`);
     console.log("ujjwal`", res.data);
     setLawyer(res.data.data);
+
+    await getLawyerReview();
   }, []);
+
+  const getLawyerReview = async () => {
+    const res = await service.get(`/review/lawyer/${id}`);
+    setReviews(res.data?.data);
+  };
 
   const handleReviewSubmit = async (e) => {
     try {
+      const payload = {
+        description: input.reviewDescription,
+        lawyer_id: parseInt(id),
+        // client_id: 3,
+        rating: parseInt(input.rating),
+      };
       console.log(input);
-      // await axios.post(`/lawyer/${id}/review`, {
-      //   review: e.target.review.value,
-      // });
-      // navigate(`/lawyer/${id}`);
+      const res = await service.post(`/review`, payload);
+      console.log("ujjwal reviews", res.data);
+      setInput({ ...input, reviewDescription: "" });
+      await getLawyerReview();
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <>
+    <div className="lawyer__container">
       {!!lawyer && (
         <div className="lawyer-profile">
-          <div className="lawyer_card" key={lawyer.id}>
+          <div className="lawyer_card">
             <div className="logo__web">
-              <img src="" alt="" />
+              <img src={lawyerIcon} alt="" />
             </div>
             <div className="lawyer_card__container">
               <div className="heading">
                 <div className="details">
-                  <h2>{lawyer.full_name}</h2>
-                  <div className="status">
-                    <span className="status__indicator active"></span>
-                    <p className="status__text active">Active</p>
-                  </div>
+                  <h1>{lawyer.full_name}</h1>
                 </div>
                 <div className="right">
-                  <div className="viewFeatures">
-                    <div onClick={() => navigate(`/lawyer/${lawyer.id}`)}>
-                      <p className="fz12">View Details</p>
+                  <div className="viewFeatures ">
+                    <div
+                      onClick={() => navigate(`/lawyer/request/${lawyer.id}`)}
+                    >
+                      <p className="fz12">Contact Lawyer</p>
                       <img src={ViewDetails} alt="view details" />
                     </div>
                   </div>
@@ -73,7 +87,25 @@ const Profile = () => {
               <div className="meta">
                 <div className="meta__info">
                   <h2 className="key">Practice area &amp; skills</h2>
-                  <h3 className="value">Personal, Divorce ,Wills</h3>
+                  <h3 className="value">
+                    {lawyer?.practice_areas
+                      .map((el) => el?.practice_area?.name)
+                      .join(", ")}
+                  </h3>
+                </div>
+
+                <div className="meta__info">
+                  <h2 className="key">Courts</h2>
+                  <h3 className="value">
+                    {lawyer?.courts.map((el) => el?.name).join(", ")}
+                  </h3>
+                </div>
+
+                <div className="meta__info">
+                  <h2 className="key">Languages</h2>
+                  <h3 className="value">
+                    {lawyer?.languages.map((el) => el?.name).join(", ")}
+                  </h3>
                 </div>
               </div>
             </div>
@@ -81,48 +113,78 @@ const Profile = () => {
         </div>
       )}
 
-      <h1>Add A Review</h1>
+      <div className="about_lawyer">
+        <h2 className="about_lawyer__heading">About</h2>
+        <div className="about_lawyer__content">
+          Advocate {lawyer?.full_name} has since been practicing and handling
+          cases independently with a result oriented approach, both
+          professionally and ethically and has now acquired {lawyer?.experience}{" "}
+          years of professional experience in providing legal consultancy and
+          advisory services. She has completed her {lawyer?.education} from
+          Jamia Millia Islamia and has been practicing and handling cases
+          independently and provides legal consultancy and advisory services.
+          <br />
+          Advocate {lawyer?.full_name} provides services in various field like{" "}
+          {lawyer?.practice_areas
+            .map((el) => el?.practice_area?.name)
+            .join(", ")}{" "}
+          .In addition to this she is skilled in drafting and vetting various
+          kinds of agreement such as Master Service Agreement, Service
+          Agreement, Teaming Agreement, Consortium Agreement, various Tripartite
+          Agreement, RFQs, Letter of Intent, MOU, Agreement with Celebrity,
+          Endorsement Agreement, License Agreement, Sub-Licensing Agreement,
+          Sub-Contracting, Third Party Agreement, Sale Deed, Corporate Lease
+          Agreement, Development Agreement(Real estate), broadcasting agreement.
+          Advocate Ray enrolled with the Bar Council of Delhi in 2008.
+        </div>
+      </div>
+
       <div className="review-form">
+        <h1>Add A Review</h1>
         <div>
           <Input
             type="textarea"
             className="review-textarea"
-            name="review"
+            name="reviewDescription"
             value={input}
             setValue={setInput}
           />
         </div>
 
+        <StarRating
+          handleChange={(val) => setInput({ ...input, rating: val })}
+        />
+
         <Button onClick={handleReviewSubmit}>Submit</Button>
       </div>
 
-      <h1>Reviews</h1>
-
-      {/* {lawyer?.reviews.map((review, index) => { */}
       <div className="review-container">
-        {[1, 2, 3].map((review, index) => {
+        <h1>Reviews</h1>
+        {reviews?.map((review, index) => {
           return (
             <div className="review-card" key={index}>
-              <h2>Pankaj K</h2>
-              <div className="review-content">
-                Your tireless efforts put in, in my legal matter are highly
-                appreciable. Your prompt responses and attention has fetched me
-                the expected result. If it hadn't for your analytical skills and
-                knowledge, the matter wouldn't have been settled by now. I am
-                grateful to you for representing me in the lawsuit with utmost
-                care and concern. Thanks for prioritizing me as a client and
-                doing everything in your power to help me.
+              <h2 className="review-card__name">{review?.client?.full_name}</h2>
+              <div>
+                {[...Array(review?.rating)].map((star, index) => {
+                  return (
+                    <span className="star on" key={index}>
+                      &#9733;
+                    </span>
+                  );
+                })}
               </div>
-
+              <div className="review-card__description">
+                {review?.description}
+              </div>
               <div className="review-timestamp">
                 <i className="fa fa-calendar" style={{ fontSize: "12px" }}></i>{" "}
-                2 months ago
+                {moment(review?.created_at).fromNow()}
               </div>
             </div>
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -33,11 +33,15 @@
       gap: 2rem;
       z-index: 2;
       flex: 1;
-      h1 {
+      color: white;
+
+      &__text {
+        line-height: initial;
+        text-shadow: rgba(34, 34, 34, 0.503) 0px 0px 7px;
+        color: #fff;
         font-size: 3rem;
         margin-bottom: 2rem;
         width: 40vw;
-        text-shadow: rgba(34, 34, 34, 0.503) 0px 0px 7px;
       }
     }
   }
