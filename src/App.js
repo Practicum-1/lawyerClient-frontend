@@ -12,18 +12,19 @@ import FindLawyer from "./pages/Client/FindLawyer/FindLawyer";
 import { useEffect } from "react";
 
 function App() {
-  axios.defaults.baseURL = "http://localhost:8080";
+  const payload = {
+    role: "client",
+    accessToken:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imphc29uQGdtYWlsLmNvbSIsImV4cCI6MTY1MTI2NzMyOSwiaWQiOjF9.ls_sMxeHb15EFr7e493MQVaCwaW_zC2nHibniueTyMs",
+  };
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(payload));
+    axios.defaults.baseURL = "http://localhost:8080";
 
-  axios.defaults.headers.common["Authorization"] = `Bearer ${
-    JSON.parse(localStorage.getItem("user")).accessToken
-  }`;
-  // const payload = {
-  //   role: "client",
-  //   accessToken: "tken",
-  // };
-  // useEffect(() => {
-  //   localStorage.setItem("user", JSON.stringify(payload));
-  // }, []);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${
+      JSON.parse(localStorage.getItem("user")).accessToken
+    }`;
+  }, []);
   return (
     <BrowserRouter>
       <Routes>
