@@ -20,8 +20,12 @@ export default function HomePage() {
             <Title size="5rem"> VAKALAT </Title>
           </div>
           <div className="tagline">
-            <h1>Find the perfect Lawyer that suits your needs </h1>
-            <h1>Find More clients and grow your practice </h1>
+            <h1 className="tagline__text">
+              Find the perfect Lawyer that suits your needs{" "}
+            </h1>
+            <h1 className="tagline__text">
+              Find More clients and grow your practice{" "}
+            </h1>
           </div>
         </div>
       </Container>

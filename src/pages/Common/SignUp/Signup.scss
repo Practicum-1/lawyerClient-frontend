@@ -1,33 +1,31 @@
 @import "../../../styles/variables.scss";
 
 .signup-page-container {
-  .lc-container {
-    padding: 20px 40px;
-
-    .signup-header {
-      margin-bottom: 2rem;
+  margin-top: 80px;
+  padding-left: 20px;
+  .signup-header {
+    margin-bottom: 2rem;
+  }
+  .role-buttons {
+    margin-bottom: 1.5rem;
+    button {
+      margin-right: 0.8rem;
     }
-    .role-buttons {
-      margin-bottom: 1.5rem;
-      button {
-        margin-right: 0.8rem;
+  }
+  .signup-box {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2.5rem;
+    row-gap: 1.5rem;
+    .input-box {
+      width: 400px;
+      .lc-label {
+        font-weight: 600;
+        font-size: 1.1rem;
       }
-    }
-    .signup-box {
-      display: flex;
-      flex-wrap: wrap;
-      column-gap: 2.5rem;
-      row-gap: 1.5rem;
-      .input-box {
-        width: 400px;
-        .lc-label {
-          font-weight: 600;
-          font-size: 1.1rem;
-        }
-        input,
-        > div {
-          margin-top: 0.6rem;
-        }
+      input,
+      > div {
+        margin-top: 0.6rem;
       }
     }
   }

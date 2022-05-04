@@ -6,13 +6,15 @@ import LeftFilter from "./LeftFilter";
 import ViewDetails from "./../../../assets/icons/details.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import service from "./../../../util/axiosConfig";
+import lawyerIcon from "./../../../assets/icons/lawyerIcon.png";
 
 const FindLawyer = () => {
   const navigate = useNavigate();
   const [lawyers, setLawyers] = useState([]);
 
   useEffect(async () => {
-    const res = await axios.get("/lawyer");
+    const res = await service.get("/lawyer");
 
     console.log("ujjwal ", res.data);
 
@@ -41,16 +43,12 @@ const FindLawyer = () => {
             return (
               <div className="lawyer_card" key={lawyer.id}>
                 <div className="logo__web">
-                  <img src="" alt="" />
+                  <img src={lawyerIcon} alt="" width={10} height="10" />
                 </div>
                 <div className="lawyer_card__container">
                   <div className="heading">
                     <div className="details">
                       <h2>{lawyer.full_name}</h2>
-                      <div className="status">
-                        <span className="status__indicator active"></span>
-                        <p className="status__text active">Active</p>
-                      </div>
                     </div>
                     <div className="right">
                       <div className="viewFeatures">
@@ -76,7 +74,18 @@ const FindLawyer = () => {
                   <div className="meta">
                     <div className="meta__info">
                       <h2 className="key">Practice area &amp; skills</h2>
-                      <h3 className="value">Personal, Divorce ,Wills</h3>
+                      <h3 className="value">
+                        {lawyer?.practice_areas
+                          .map((el) => el?.practice_area?.name)
+                          .join(", ")}
+                      </h3>
+                    </div>
+
+                    <div className="meta__info">
+                      <h2 className="key">Courts</h2>
+                      <h3 className="value">
+                        {lawyer?.courts.map((el) => el?.name).join(", ")}
+                      </h3>
                     </div>
                   </div>
                 </div>

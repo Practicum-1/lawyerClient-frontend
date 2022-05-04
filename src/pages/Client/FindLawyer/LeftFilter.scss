@@ -2,7 +2,11 @@
   min-width: 350px;
   height: 100%;
   background-color: #f2f2f2;
-  padding: 0 1.5rem;
+  padding: 1.5rem;
+
+  &__heading {
+    margin-bottom: 8px;
+  }
 }
 
 .input-box {

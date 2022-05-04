@@ -12,7 +12,8 @@ import ButtonThemes from "../../../components/Button/Themes";
 import { ROLES } from "../../../constants/roles";
 
 import "./Signup.scss";
-import axios from "axios";
+import service from "./../../../util/axiosConfig";
+import Navbar from "../../../components/Navbar/Navbar";
 
 export default function SignUp() {
   const [role, setRole] = useState(ROLES.CLIENT);
@@ -58,7 +59,7 @@ export default function SignUp() {
 
       // deleteKeys.forEach((e) => delete clientPayload[e]);
 
-      await axios.post("/client", clientPayload);
+      await service.post("/client", clientPayload);
     } else {
       const lawyerPayload = {
         ...input,
@@ -70,86 +71,89 @@ export default function SignUp() {
       };
       console.log("ujjwal", lawyerPayload);
 
-      await axios.post("/lawyer", lawyerPayload);
+      await service.post("/lawyer", lawyerPayload);
     }
   };
 
   return (
-    <PageContainer className={"signup-page-container"}>
+    <PageContainer>
       <Container>
-        <div className="signup-header">
-          <Title>Register Here</Title>
-          <div>
-            We need you to help us with some basic information for your account
-            creation. All fields are mandatory
+        <Navbar />
+        <div className={"signup-page-container"}>
+          <div className="signup-header">
+            <Title>Register Here</Title>
+            <div>
+              We need you to help us with some basic information for your
+              account creation. All fields are mandatory
+            </div>
           </div>
-        </div>
-        <div className="role-buttons">
-          <Button
-            onClick={() => setRole(ROLES.CLIENT)}
-            theme={
-              role === ROLES.CLIENT
-                ? ButtonThemes.PRIMARY
-                : ButtonThemes.GREY_OUTLINE
-            }
-          >
-            CLIENT
-          </Button>
-          <Button
-            onClick={() => setRole(ROLES.LAWYER)}
-            theme={
-              role === ROLES.LAWYER
-                ? ButtonThemes.PRIMARY
-                : ButtonThemes.GREY_OUTLINE
-            }
-          >
-            LAWYER
-          </Button>
-        </div>
-        <div className="signup-box">
-          {inputFields.map((field, index) => {
-            if (
-              field.type === "text" ||
-              field.type === "password" ||
-              field.type === "number"
-            ) {
-              return (
-                <div className="input-box" key={index}>
-                  <Label>{field.label}</Label>
-                  <Input
-                    type={field.type}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    value={input}
-                    setValue={setInput}
-                  />
-                </div>
-              );
-            }
-            if (field.type === "select") {
-              return (
-                <div className="input-box" key={index}>
-                  <Label className="role">{field.label}</Label>
-                  <Input
-                    type="select"
-                    placeholder={field.placeholder}
-                    options={field.options}
-                    setValue={setInput}
-                    value={input}
-                    name={field.name}
-                    isSearchable="true"
-                    height="45px"
-                  />
-                </div>
-              );
-            }
-          })}
-        </div>
-        <div className="buttons">
-          <br />
-          <Button onClick={handelSignUp} id="login-btn">
-            Register Now
-          </Button>
+          <div className="role-buttons">
+            <Button
+              onClick={() => setRole(ROLES.CLIENT)}
+              theme={
+                role === ROLES.CLIENT
+                  ? ButtonThemes.PRIMARY
+                  : ButtonThemes.GREY_OUTLINE
+              }
+            >
+              CLIENT
+            </Button>
+            <Button
+              onClick={() => setRole(ROLES.LAWYER)}
+              theme={
+                role === ROLES.LAWYER
+                  ? ButtonThemes.PRIMARY
+                  : ButtonThemes.GREY_OUTLINE
+              }
+            >
+              LAWYER
+            </Button>
+          </div>
+          <div className="signup-box">
+            {inputFields.map((field, index) => {
+              if (
+                field.type === "text" ||
+                field.type === "password" ||
+                field.type === "number"
+              ) {
+                return (
+                  <div className="input-box" key={index}>
+                    <Label>{field.label}</Label>
+                    <Input
+                      type={field.type}
+                      name={field.name}
+                      placeholder={field.placeholder}
+                      value={input}
+                      setValue={setInput}
+                    />
+                  </div>
+                );
+              }
+              if (field.type === "select") {
+                return (
+                  <div className="input-box" key={index}>
+                    <Label className="role">{field.label}</Label>
+                    <Input
+                      type="select"
+                      placeholder={field.placeholder}
+                      options={field.options}
+                      setValue={setInput}
+                      value={input}
+                      name={field.name}
+                      isSearchable="true"
+                      height="45px"
+                    />
+                  </div>
+                );
+              }
+            })}
+          </div>
+          <div className="buttons">
+            <br />
+            <Button onClick={handelSignUp} id="login-btn">
+              Register Now
+            </Button>
+          </div>
         </div>
       </Container>
     </PageContainer>

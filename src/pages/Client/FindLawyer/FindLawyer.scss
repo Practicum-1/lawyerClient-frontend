@@ -58,15 +58,15 @@ $gray-t: #828282;
 
   .logo__web {
     margin-left: 20px;
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
-    overflow: hidden;
+    // width: 80px;
+    // height: 80px;
+    // border-radius: 10px;
+    // overflow: hidden;
 
     img {
-      object-fit: contain;
-      width: 100%;
-      height: 100%;
+      // object-fit: contain;
+      width: 100px;
+      height: 100px;
     }
   }
 
@@ -188,12 +188,14 @@ $gray-t: #828282;
     .meta {
       display: flex;
       justify-content: flex-start;
+      gap: 10px;
       p,
       h6 {
         margin: 0;
       }
       .meta__info {
         margin-right: 2px;
+        width: 100%;
       }
       .key {
         color: $gray-t;

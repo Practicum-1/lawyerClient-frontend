@@ -11,6 +11,9 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Button from "../Button/Button";
+import VakalatIcon from "./../../assets/icons/logo.png";
+import AvatarIcon from "./../../assets/icons/avatar.png";
+import { ROLES } from "../../constants/roles";
 
 export default function Navbar() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -63,24 +66,49 @@ export default function Navbar() {
       </div> */}
       <nav>
         <Link to="/">
-          <img src="./images/logo.png" className="navbar-logo" alt="" />
+          <img src={VakalatIcon} className="navbar-logo" alt="vakalat-logo" />
         </Link>
         <ul>
-          <li>
-            <Link to="/find-lawyers" className="nav-links">
-              FIND A LAWYER
-            </Link>
-          </li>
-          <li>
-            <Link to="/" className="nav-links">
-              LEGAL SERVICES
-            </Link>
-          </li>
-          <li className="user">
-            <Link to="/user">
-              <img src="/images/avatar.png" alt="avatar" />
-            </Link>
-          </li>
+          {user?.role ? (
+            user?.role == ROLES["CLIENT"] ? (
+              <>
+                <li>
+                  <Link to="/find-lawyers" className="nav-links">
+                    FIND A LAWYER
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/chat" className="nav-links">
+                    CHAT
+                  </Link>
+                </li>
+                <li className="user">
+                  <Link to="/client-profile">
+                    <img src={AvatarIcon} width={40} height={40} alt="avatar" />
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="/chat" className="nav-links">
+                    CHAT
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard" className="nav-links">
+                    DASHBOARD
+                  </Link>
+                </li>
+
+                <li className="user">
+                  <Link to="/lawyer-profile">
+                    <img src={AvatarIcon} width={40} height={40} alt="avatar" />
+                  </Link>
+                </li>
+              </>
+            )
+          ) : null}
           {isLoggedIn ? (
             <>
               <li className="buttons">

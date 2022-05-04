@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import Button from "../../../components/Button/Button";
 import Card from "../../../components/Card/Card";
@@ -10,6 +9,8 @@ import Title from "../../../components/Title/Title";
 import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../../constants/roles";
 import "./Login.scss";
+import service from "./../../../util/axiosConfig";
+import Navbar from "../../../components/Navbar/Navbar";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,17 +21,20 @@ const Login = () => {
   };
   const onSubmit = async () => {
     try {
-      const res = await axios.post("/auth/login", input);
+      const res = await service.post("/auth/login", input);
 
       if (res.data.data.token) {
         const payload = {
           role: input.role,
           accessToken: res.data.data.token,
+          user: res.data.data[input.role],
         };
         localStorage.setItem("user", JSON.stringify(payload));
 
         if (input.role === ROLES.CLIENT) {
           navigate("/find-lawyers");
+        } else {
+          navigate("/dashboard");
         }
       }
     } catch (error) {
@@ -41,6 +45,7 @@ const Login = () => {
 
   return (
     <PageContainer className={"login-page"}>
+      <Navbar />
       <div className="lc-gradient">
         <img
           // src={
@@ -52,7 +57,7 @@ const Login = () => {
       </div>
       <div className="login-container">
         <Card className="login-box">
-          <Title className="title">SIGN IN</Title>
+          <Title className="login_title">SIGN IN</Title>
           <div className="input-box">
             <Label className="role">Who are you ?</Label>
             <Input
