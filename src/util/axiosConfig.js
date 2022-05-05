@@ -44,6 +44,7 @@ class Service {
     return this.service.get(path, {
       headers: {
         Authorization: `Bearer ${
+          !!localStorage.getItem("user") &&
           JSON.parse(localStorage.getItem("user"))?.accessToken
         }`,
       },
@@ -58,6 +59,7 @@ class Service {
       data: payload,
       headers: {
         Authorization: `Bearer ${
+          !!localStorage.getItem("user") &&
           JSON.parse(localStorage.getItem("user"))?.accessToken
         }`,
       },
@@ -72,6 +74,7 @@ class Service {
       data: payload,
       headers: {
         Authorization: `Bearer ${
+          !!localStorage.getItem("user") &&
           JSON.parse(localStorage.getItem("user"))?.accessToken
         }`,
       },
@@ -87,6 +90,7 @@ class Service {
       data: payload,
       headers: {
         Authorization: `Bearer ${
+          !!localStorage.getItem("user") &&
           JSON.parse(localStorage.getItem("user"))?.accessToken
         }`,
       },
@@ -110,6 +114,7 @@ class Service {
       data: payload,
       headers: {
         Authorization: `Bearer ${
+          !!localStorage.getItem("user") &&
           JSON.parse(localStorage.getItem("user"))?.accessToken
         }`,
       },
@@ -145,6 +150,7 @@ class Service {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
+          !!localStorage.getItem("user") &&
           JSON.parse(localStorage.getItem("user"))?.accessToken
         }`,
       },
@@ -187,6 +193,7 @@ class Service {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
+          !!localStorage.getItem("user") &&
           JSON.parse(localStorage.getItem("user"))?.accessToken
         }`,
       },
@@ -227,6 +234,7 @@ class Service {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${
+          !!localStorage.getItem("user") &&
           JSON.parse(localStorage.getItem("user"))?.accessToken
         }`,
       },
@@ -241,6 +249,7 @@ class Service {
       data: payload,
       headers: {
         Authorization: `Bearer ${
+          !!localStorage.getItem("user") &&
           JSON.parse(localStorage.getItem("user"))?.accessToken
         }`,
       },
@@ -255,6 +264,7 @@ class Service {
       data: payload,
       headers: {
         Authorization: `Bearer ${
+          !!localStorage.getItem("user") &&
           JSON.parse(localStorage.getItem("user"))?.accessToken
         }`,
       },
@@ -270,6 +280,7 @@ class Service {
         responseType: "json",
         headers: {
           Authorization: `Bearer ${
+            !!localStorage.getItem("user") &&
             JSON.parse(localStorage.getItem("user"))?.accessToken
           }`,
         },
@@ -300,6 +311,7 @@ class Service {
         data: payload,
         headers: {
           Authorization: `Bearer ${
+            !!localStorage.getItem("user") &&
             JSON.parse(localStorage.getItem("user"))?.accessToken
           }`,
         },
@@ -321,6 +333,7 @@ class Service {
         responseType: "json",
         headers: {
           Authorization: `Bearer ${
+            !!localStorage.getItem("user") &&
             JSON.parse(localStorage.getItem("user"))?.accessToken
           }`,
         },
@@ -336,6 +349,7 @@ class Service {
         responseType: "json",
         headers: {
           Authorization: `Bearer ${
+            !!localStorage.getItem("user") &&
             JSON.parse(localStorage.getItem("user"))?.accessToken
           }`,
         },

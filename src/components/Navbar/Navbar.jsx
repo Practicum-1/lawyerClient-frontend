@@ -16,7 +16,8 @@ import AvatarIcon from "./../../assets/icons/avatar.png";
 import { ROLES } from "../../constants/roles";
 
 export default function Navbar() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user =
+    !!localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"));
   const checkAuthentication = () => {
     if (user?.accessToken && Object.keys(ROLE_ROUTES).includes(user?.role)) {
       return true;
