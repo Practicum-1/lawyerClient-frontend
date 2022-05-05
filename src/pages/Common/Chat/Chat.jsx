@@ -8,7 +8,7 @@ import { ROLES } from "../../../constants/roles";
 const Chat = () => {
   const [conversations, setConversations] = useState([]);
   const [users, setUsers] = useState([]);
-  const [userChat, setUserChat] = useState([]);
+  const [openedUser, setOpenedUser] = useState([]);
   const [inputData, setInputData] = useState({
     chat: "",
   });
@@ -22,16 +22,54 @@ const Chat = () => {
       if (userRole === ROLES.LAWYER) {
         const res = await service.get(`/lawyer_client/lawyer/${lawyerId}`);
         setUsers(res.data.data);
+      } else if (userRole === ROLES.CLIENT) {
+        const res = await service.get(`/lawyer_client/client/${clientId}`);
+        setUsers(res.data.data);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
-  const handleUserChat = (user) => {
+  const handleUserChat = async (user) => {
     console.log("ujjwal checking ", user);
+    setOpenedUser(user);
+    try {
+      const res = await service.get(`/lawyer_client/chat/${user?.id}`);
+
+      if (res.data.msg === "success") {
+        setConversations(res.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleSendChat = () => {
+  const handleSendChat = async () => {
     console.log("ujjwal", inputData);
+    const payload = {
+      lawyer_client_id: openedUser?.id,
+      message: inputData.chat,
+      sent_by_lawyer: userRole === ROLES.LAWYER,
+    };
+    try {
+      const res = await service.post(`/lawyer_client/chat`, payload);
+      if (res.data.msg === "success") {
+        const response = await service.get(
+          `/lawyer_client/chat/${openedUser?.id}`
+        );
+        if (response.data.msg === "success") {
+          setConversations(response.data.data);
+        }
+
+        setInputData({
+          ...inputData,
+          chat: "",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -46,7 +84,9 @@ const Chat = () => {
                 className="chat_left__card"
                 onClick={() => handleUserChat(user)}
               >
-                {user?.client?.full_name}
+                {userRole === ROLES.LAWYER
+                  ? user?.client?.full_name
+                  : user?.lawyer?.full_name}
               </div>
             );
           })}
@@ -55,27 +95,36 @@ const Chat = () => {
 
       <div className="chat_right">
         <div className="interaction_container">
-          {[...Array(40).keys()].map((interaction, index) => {
-            return (
-              <>
-                <div
-                  className={`interaction_container_image  ${
-                    !interaction?.user ? "right" : ""
-                  }`}
-                  key={index}
-                >
-                  <div className="fontColor_dark image__filename">
-                    interaction.comment
+          {conversations
+            ?.slice(0)
+            ?.reverse()
+            ?.map((interaction, index) => {
+              return (
+                <>
+                  <div
+                    className={`interaction_container_image  ${
+                      userRole === ROLES.LAWYER
+                        ? interaction?.sent_by_lawyer
+                          ? "right"
+                          : ""
+                        : interaction?.sent_by_lawyer
+                        ? ""
+                        : "right"
+                    }`}
+                    key={index}
+                  >
+                    <div className="fontColor_dark image__filename">
+                      {interaction.message}
+                    </div>
                   </div>
-                </div>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
         </div>
         <TextArea
           rows={2}
           color={"white"}
-          //   value={inputData.comment}
+          value={inputData.chat}
           change={(val) => {
             console.log("ujjwal garg", val);
             setInputData({
