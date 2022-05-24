@@ -17,6 +17,7 @@ const Chat = () => {
   const lawyerId = JSON.parse(localStorage.getItem("user"))?.user?.id;
   const userRole = JSON.parse(localStorage.getItem("user"))?.role;
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     try {
       if (userRole === ROLES.LAWYER) {

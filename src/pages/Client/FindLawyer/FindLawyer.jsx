@@ -33,7 +33,7 @@ const FindLawyer = () => {
             Whether you are filing a divorce, wanting child custody, alimony or
             maintenance, fighting 498a, fighting a dispute related to discord in
             the family, or are being harassed by your children, choose a lawyer
-            who is an expert in family law. Use LawRato to hire a top rated
+            who is an expert in family law. Use Vakalat to hire a top rated
             family dispute lawyer in India.
           </p>
         </div>

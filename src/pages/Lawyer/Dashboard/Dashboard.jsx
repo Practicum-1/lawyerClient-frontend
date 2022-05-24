@@ -22,7 +22,6 @@ const Dashboard = () => {
 
   const handleStatus = async (status, request) => {
     const res = await service.patch(`/request/${status}/${request?.id}`);
-
     await getAllReq();
   };
 
@@ -30,7 +29,6 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <h1>Client Request</h1>
-
       <div className="client_request__container">
         {requests.map((request, index) => {
           return (
@@ -40,7 +38,6 @@ const Dashboard = () => {
                   <div className="details">
                     <h1>{request?.client_id} Name </h1>
                   </div>
-
                   <div className="details__icon">
                     <i
                       className="fa-solid fa-circle-check approve__icon"

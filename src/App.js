@@ -10,6 +10,7 @@ import Signup from "./pages/Common/SignUp/Signup";
 import Navbar from "./components/Navbar/Navbar";
 import FindLawyer from "./pages/Client/FindLawyer/FindLawyer";
 import { useEffect } from "react";
+import ChatbotHelper from "./components/Chatbot/chatbot/ChatbotHelper";
 
 function App() {
   // axios.defaults.baseURL = "http://localhost:8080";
@@ -27,6 +28,7 @@ function App() {
   // }, []);
   return (
     <BrowserRouter>
+      <ChatbotHelper />
       <Routes>
         {/* Open Routes */}
         {/* <Route path="/" exact element={<Navbar />}> */}
