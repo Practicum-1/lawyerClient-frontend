@@ -33,6 +33,7 @@ const Request = () => {
     };
 
     const res = service.post("/request", payload);
+    window.alert("Request has been sent, lawyer will contact you soon");
   };
 
   return (

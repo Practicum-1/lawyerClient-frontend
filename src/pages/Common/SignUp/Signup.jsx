@@ -60,6 +60,7 @@ export default function SignUp() {
       // deleteKeys.forEach((e) => delete clientPayload[e]);
 
       await service.post("/client", clientPayload);
+      window.location.href = "/login";
     } else {
       const lawyerPayload = {
         ...input,
@@ -72,6 +73,7 @@ export default function SignUp() {
       console.log("ujjwal", lawyerPayload);
 
       await service.post("/lawyer", lawyerPayload);
+      window.location.href = "/login";
     }
   };
 

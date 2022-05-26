@@ -16,66 +16,74 @@ const Dashboard = () => {
       const pendingReq = res.data.data?.requests.filter(
         (el, index) => el.status === "pending"
       );
-      setRequests(pendingReq);
+      pendingReq.forEach(async (req) => {
+        const res = await service.get(`/request/${req.id}`);
+        const request = await res.data.data;
+        if (request) {
+          setRequests([...requests, request]);
+        }
+      });
     }
   };
+
+  console.log(requests);
 
   const handleStatus = async (status, request) => {
     const res = await service.patch(`/request/${status}/${request?.id}`);
     await getAllReq();
   };
 
-  console.log("ujjwal ", requests);
   return (
     <div className="dashboard">
       <h1>Client Request</h1>
       <div className="client_request__container">
-        {requests.map((request, index) => {
-          return (
-            <div className="client_request__card" key={request?.id}>
-              <div className="client_request_card__container">
-                <div className="heading">
-                  <div className="details">
-                    <h1>{request?.client_id} Name </h1>
+        {requests.length > 0 &&
+          requests.map((request, index) => {
+            return (
+              <div className="client_request__card" key={request?.id}>
+                <div className="client_request_card__container">
+                  <div className="heading">
+                    <div className="details">
+                      <h1>{request?.client?.full_name} </h1>
+                    </div>
+                    <div className="details__icon">
+                      <i
+                        className="fa-solid fa-circle-check approve__icon"
+                        onClick={() =>
+                          handleStatus(REQUEST_STATUS["APPROVE"], request)
+                        }
+                      ></i>
+                      <i
+                        className="fa-solid fa-circle-xmark reject__icon"
+                        onClick={() =>
+                          handleStatus(REQUEST_STATUS["DENY"], request)
+                        }
+                      ></i>
+                    </div>
                   </div>
-                  <div className="details__icon">
-                    <i
-                      className="fa-solid fa-circle-check approve__icon"
-                      onClick={() =>
-                        handleStatus(REQUEST_STATUS["APPROVE"], request)
-                      }
-                    ></i>
-                    <i
-                      className="fa-solid fa-circle-xmark reject__icon"
-                      onClick={() =>
-                        handleStatus(REQUEST_STATUS["DENY"], request)
-                      }
-                    ></i>
+
+                  <div className="policyNo">
+                    <p>{request?.client?.phone}</p>
+                    <div className="tooltip_policy"></div>
                   </div>
-                </div>
 
-                <div className="policyNo">
-                  <p>+91 7021991264</p>
-                  <div className="tooltip_policy"></div>
-                </div>
+                  <div className="policyNo">
+                    <p>{request?.client?.email}</p>
+                    <div className="tooltip_policy"></div>
+                  </div>
 
-                <div className="policyNo">
-                  <p>ujjwalgarg.252@gmail.com</p>
-                  <div className="tooltip_policy"></div>
-                </div>
+                  <hr />
 
-                <hr />
-
-                <div className="meta">
-                  <div className="meta__info">
-                    <h1 className="key">{request?.request_data?.title}</h1>
-                    <h2 className="value">{request?.request_data?.body}</h2>
+                  <div className="meta">
+                    <div className="meta__info">
+                      <h1 className="key">{request?.request_data?.title}</h1>
+                      <h2 className="value">{request?.request_data?.body}</h2>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </div>
   );
