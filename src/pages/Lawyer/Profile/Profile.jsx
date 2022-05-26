@@ -116,13 +116,13 @@ const Profile = () => {
       <div className="about_lawyer">
         <h2 className="about_lawyer__heading">About</h2>
         <div className="about_lawyer__content">
-          Advocate {lawyer?.full_name} has since been practicing and handling
-          cases independently with a result oriented approach, both
-          professionally and ethically and has now acquired {lawyer?.experience}{" "}
-          years of professional experience in providing legal consultancy and
-          advisory services. She has completed her {lawyer?.education} from
-          Jamia Millia Islamia and has been practicing and handling cases
-          independently and provides legal consultancy and advisory services.
+          Advocate {lawyer?.full_name} has been practicing and handling cases
+          independently with a result oriented approach, both professionally and
+          ethically and has now acquired {lawyer?.experience} years of
+          professional experience in providing legal consultancy and advisory
+          services. She has completed her {lawyer?.education} from Jamia Millia
+          Islamia and has been practicing and handling cases independently and
+          provides legal consultancy and advisory services.
           <br />
           Advocate {lawyer?.full_name} provides services in various field like{" "}
           {lawyer?.practice_areas
